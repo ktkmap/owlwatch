@@ -1,0 +1,7 @@
+{
+  "name": "owlwatch",
+  "version": "0.0.0",
+  "dependencies": {
+    "ws": "^7.3.0"
+  }
+}
