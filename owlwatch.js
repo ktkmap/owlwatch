@@ -4,7 +4,7 @@ var masterOwlStates={};
 
 function main()
 {
-    var owlWatchServer=new WebSocket.Server({port:2000});
+    var owlWatchServer=new WebSocket.Server({port:2000,path:"/watch"});
     console.log("watching for owls...");
 
     owlWatchServer.on("connection",(owlConnection)=>{

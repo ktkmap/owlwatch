@@ -1,7 +1,7 @@
 const osu=require("node-os-utils");
 const WebSocket=require("ws");
 
-const owlWatchConnection=new WebSocket("ws://fox:2000");
+const owlWatchConnection=new WebSocket("ws://fox:2000/watch");
 
 async function main()
 {

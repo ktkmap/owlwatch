@@ -4,7 +4,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "server":"node testserver"
+    "server": "node testserver"
   },
   "dependencies": {
     "express": "^4.17.1",
@@ -12,6 +12,8 @@
     "ws": "^7.3.0"
   },
   "devDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "@babel/core": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
