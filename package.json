@@ -2,10 +2,12 @@
   "name": "owlwatch",
   "version": "0.0.0",
   "scripts": {
-    "build":"webpack",
-    "watch":"webpack --watch"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "server":"node testserver"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "node-os-utils": "^1.2.2",
     "ws": "^7.3.0"
   },
