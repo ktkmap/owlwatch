@@ -13,13 +13,16 @@ function main()
         owlConnection.on("message",(message)=>{
             message=JSON.parse(message);
             masterOwlStates[message.name]=message;
-            console.log(masterOwlStates);
         });
 
         owlConnection.on("close",()=>{
             console.log("owl disconnected");
         });
     });
+
+    setInterval(()=>{
+        console.log(masterOwlStates);
+    },2000);
 }
 
 main();
