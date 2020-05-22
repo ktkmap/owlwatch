@@ -1,13 +1,11 @@
-const WebSocket=require("ws");
+const masterOwlStates={};
 
-var masterOwlStates={};
-
-function main()
+// websocket endpoint listening for incoming owl status messages
+function owlWatchService(app,path)
 {
-    var owlWatchServer=new WebSocket.Server({port:2000,path:"/watch"});
     console.log("watching for owls...");
 
-    owlWatchServer.on("connection",(owlConnection)=>{
+    app.ws(path,(owlConnection)=>{
         console.log("owl connected");
 
         owlConnection.on("message",(message)=>{
@@ -22,7 +20,18 @@ function main()
 
     setInterval(()=>{
         console.log(masterOwlStates);
-    },2000);
+    },2500);
 }
 
-main();
+// service that provides continuous owl state updates to connected clients
+function owlUpdatesService(app,path)
+{
+    app.ws(path,(owlWatcher)=>{
+        console.log("owl watcher connected");
+    });
+}
+
+module.exports={
+    owlWatchService,
+    owlUpdatesService
+};
