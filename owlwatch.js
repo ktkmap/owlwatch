@@ -1,4 +1,4 @@
-const masterOwlStates={};
+const NanoTimer=require("nanotimer");
 
 class OwlWatchService
 {
@@ -10,6 +10,8 @@ class OwlWatchService
 
         this.updateClientConnectionsId=0;
         this.updateClients={};
+
+        this.heartbeat();
     }
 
     // websocket service listening for inbound status updates from owls
@@ -29,10 +31,6 @@ class OwlWatchService
                 console.log("owl disconnected");
             });
         });
-
-        setInterval(()=>{
-            console.log(this.masterOwlStates);
-        },3000);
     }
 
     // websocket outbound service broadcasting owl master state
@@ -49,10 +47,15 @@ class OwlWatchService
                 delete this.updateClients[clientid];
             });
         });
+    }
 
-        setInterval(()=>{
+    heartbeat()
+    {
+        var timer=new NanoTimer();
+        timer.setInterval(()=>{
+            console.log("status",this.masterOwlStates);
             console.log("clients",Object.keys(this.updateClients));
-        },3000);
+        },"","3s");
     }
 }
 
