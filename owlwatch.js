@@ -20,15 +20,30 @@ function owlWatchService(app,path)
 
     setInterval(()=>{
         console.log(masterOwlStates);
-    },2500);
+    },3000);
 }
+
+var updateClientConnectionsId=0;
+const updateClients={};
 
 // service that provides continuous owl state updates to connected clients
 function owlUpdatesService(app,path)
 {
     app.ws(path,(owlWatcher)=>{
         console.log("owl watcher connected");
+
+        var clientid=++updateClientConnectionsId;
+        updateClients[clientid]=owlWatcher;
+
+        owlWatcher.on("close",()=>{
+            console.log("owl watcher closed");
+            delete updateClients[clientid];
+        });
     });
+
+    setInterval(()=>{
+        console.log("clients",Object.keys(updateClients));
+    },3000);
 }
 
 module.exports={
