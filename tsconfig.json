@@ -1,13 +1,15 @@
 {
     "compilerOptions":{
-        "jsx":"react",
-        "noImplicitAny":true,
-        "lib":["dom","ESNext"]
+        "strict":true,
+        "outDir":"build",
+        "lib":["ESNext","DOM"],
+        "module":"commonjs",
+        "esModuleInterop":true,
+        "target": "ESNext"
     },
     "include":[
         "**/*.ts",
-        "**/*.d.ts",
-        "**/*.tsx"
+        "**/*.d.ts"
     ],
     "exclude":[
         "node_modules"
