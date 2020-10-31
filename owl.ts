@@ -1,8 +1,18 @@
 import si from "systeminformation";
+import ws from "ws";
+import NanoTimer from "nanotimer";
 
 function main()
 {
-    getOwlStats();
+    // const owlWatchConnection=new ws("ws://localhost:2001/owlinbound");
+
+    var timer=new NanoTimer();
+    timer.setInterval(async ()=>{
+        var stats:OwlStats=await getOwlStats();
+        console.log(stats);
+    },"","3s");
+
+    console.log("owl flying...");
 }
 
 // return owl stats of the current computer
@@ -27,6 +37,12 @@ async function getOwlStats():Promise<OwlStats>
             total:memInfo.total
         }
     };
+}
+
+// send stats to a connection
+function broadcastOwlStats(stats:OwlStats,connection:ws):void
+{
+    connection.send(JSON.stringify(stats));
 }
 
 main();

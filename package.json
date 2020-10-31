@@ -2,7 +2,7 @@
   "name": "owlwatch",
   "version": "2.0.0",
   "scripts": {
-    "run-owl":"tsc && node build/owl"
+    "owl":"tsc && node build/owl"
   },
   "devDependencies": {
     "@types/nanotimer": "^0.3.0",
