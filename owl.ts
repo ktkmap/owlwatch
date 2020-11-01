@@ -2,14 +2,17 @@ import si from "systeminformation";
 import ws from "ws";
 import NanoTimer from "nanotimer";
 
+// uri to send updates to
+const _owlWatchUrl:string="ws://localhost:2001/owl-inbound";
+
 function main()
 {
-    // const owlWatchConnection=new ws("ws://localhost:2001/owlinbound");
+    const owlWatchConnection=new ws(_owlWatchUrl);
 
     var timer=new NanoTimer();
     timer.setInterval(async ()=>{
         var stats:OwlStats=await getOwlStats();
-        console.log(stats);
+        broadcastOwlStats(owlWatchConnection,stats);
     },"","3s");
 
     console.log("owl flying...");
@@ -40,7 +43,7 @@ async function getOwlStats():Promise<OwlStats>
 }
 
 // send stats to a connection
-function broadcastOwlStats(stats:OwlStats,connection:ws):void
+function broadcastOwlStats(connection:ws,stats:OwlStats):void
 {
     connection.send(JSON.stringify(stats));
 }
